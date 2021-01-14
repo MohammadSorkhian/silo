@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\moham\\Desktop\\silo\\silo_project\\silo_project.csproj": {}
+    "C:\\Users\\moham\\OneDrive\\silo\\silo_project\\silo_project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\moham\\Desktop\\silo\\silo_project\\silo_project.csproj": {
+    "C:\\Users\\moham\\OneDrive\\silo\\silo_project\\silo_project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\moham\\Desktop\\silo\\silo_project\\silo_project.csproj",
+        "projectUniqueName": "C:\\Users\\moham\\OneDrive\\silo\\silo_project\\silo_project.csproj",
         "projectName": "silo_project",
-        "projectPath": "C:\\Users\\moham\\Desktop\\silo\\silo_project\\silo_project.csproj",
+        "projectPath": "C:\\Users\\moham\\OneDrive\\silo\\silo_project\\silo_project.csproj",
         "packagesPath": "C:\\Users\\moham\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\moham\\Desktop\\silo\\silo_project\\obj\\",
+        "outputPath": "C:\\Users\\moham\\OneDrive\\silo\\silo_project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\moham\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -42,7 +42,7 @@
           "dependencies": {
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
-              "version": "[5.0.1, )"
+              "version": "[5.0.2, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -63,6 +63,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "Microsoft.VisualStudio.Web.BrowserLink": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "System.Globalization.Calendars": {
               "target": "Package",

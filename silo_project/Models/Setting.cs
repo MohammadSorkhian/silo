@@ -9,6 +9,8 @@ namespace silo_project.Models
 {
     public class Setting
     {
+        public int ID { get; set; }
+
         [Column(TypeName ="nvarchar(50)")]
         [Required]
         public string Name { get; set; }

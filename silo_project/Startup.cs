@@ -27,6 +27,7 @@ namespace silo_project
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
             Configuration["ConnectionStrings:DefaultConnection"]));
+
             services.AddControllersWithViews();
         }
 
@@ -36,6 +37,7 @@ namespace silo_project
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
             }
             else
             {

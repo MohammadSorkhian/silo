@@ -8,6 +8,7 @@ namespace silo_project.Models
 {
     public class DeviceRef
     {
+        public int ID { get; set; }
         public string Name { get; set; }
     }
 }

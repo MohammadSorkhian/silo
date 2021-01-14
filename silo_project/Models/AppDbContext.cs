@@ -20,5 +20,7 @@ namespace silo_project.Models
 
         public DbSet<Setting> Settings { get; set; }
 
+
     }
+
 }
