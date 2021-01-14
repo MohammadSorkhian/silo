@@ -1,15 +1,15 @@
-﻿@using silo_project.Models
-@model IEnumerable<Silo>
+﻿@using silo_project.ViewModel
+@model AddSiloViewModel
 @{
-    ViewData["Title"] = "Home Page";
     int i = 1;
 }
+<h4 class="bg-success text-light">This is the Add silo page</h4>
 
 <div class="text-center">
     <div class="container">
         <div class="row">
             <table class="table table-striped">
-                <thead >
+                <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var silo in Model)
+                    @foreach (var silo in Model.allSilos)
                     {
                         <tr>
                             <th scope="row">@i</th>
@@ -45,9 +45,29 @@
                             <td><button asp- type="button" class="btn btn-danger">Delete</button></td>
                         </tr>
                         i++;
-                }
+                    }
+                    <form enctype="multipart/form-data" asp-controller="Home" asp-action="AddSilo" method="post">
+
+                        <tr>
+                            <th scope="row">@i</th>
+                            <td><input asp-for="silo.Name" placeholder="Name" /></td>
+                            <td><input asp-for="silo.Capacity" /></td>
+                            <td><input asp-for="silo.DeviceID" /></td>
+                            <td><input asp-for="silo.CommandID" /></td>
+                            <td><input asp-for="silo.ZeroValue" /></td>
+                            <td><input asp-for="silo.ScaleValue" /></td>
+                            <td><input asp-for="silo.AllowDownload" /></td>
+                            <td><input asp-for="silo.Weight" /></td>
+                            <td><input asp-for="silo.IsActive" /></td>
+                            <td><input asp-for="silo.IsRegistered" /></td>
+                            <td><button type="submit" class="btn btn-info">Add</button></td>
+                            <td><a asp-controller="Home" asp-action="Index" type="button" class="btn btn-secondary">Cancel</a></td>
+                        </tr>
+                    </form>
                 </tbody>
             </table>
+        </div>
+        <div class="row">
         </div>
         <div class="row ">
             <a asp-controller="Home" asp-action="AddSilo" class="btn btn-success text-light offset-9 col-3">Add a Silo</a>

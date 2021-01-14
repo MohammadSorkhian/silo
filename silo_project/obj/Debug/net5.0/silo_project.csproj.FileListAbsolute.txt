@@ -386,3 +386,4 @@ C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\ref\silo_project.dll
 C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\silo_project.pdb
 C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\silo_project.genruntimeconfig.cache
 C:\Users\moham\OneDrive\silo\silo_project\bin\Debug\net5.0\Microsoft.VisualStudio.Web.BrowserLink.dll
+C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\Razor\Views\Home\AddSiloView.cshtml.g.cs

@@ -10,10 +10,8 @@ namespace silo_project.Models
     {
         public int ID { get; set; }
 
-        [Required]
         public Silo Silo { get; set; }
 
-        [Required]
         public DateTime EnDate { get; set; }
 
         public DateTime PeDate { get; set; }
