@@ -22,6 +22,7 @@ namespace silo_project.Controllers
             this.hostingEnvironment = hostingEnvironment;
         }
 
+
         [Route("/")]
         [Route("/Home")]
         [Route("/Index")]
@@ -31,24 +32,35 @@ namespace silo_project.Controllers
             return View(allSilos);
         }
 
+
         [HttpGet]
         public ViewResult AddSilo()
         {
             AddSiloViewModel addSiloViewModel = new AddSiloViewModel();
             addSiloViewModel.allSilos = sqlSiloRepository.GetAllSilos();
-            addSiloViewModel.silo = new Silo();
             return View("AddSiloView", addSiloViewModel);
         }
 
-        [HttpPost]
-        public IActionResult AddSilo(AddSiloViewModel silo)
-        {
-            //Console.WriteLine("received");
-            //sqlSiloRepository.AddSilo(silo);
-            return RedirectToAction("Index");
 
+        [HttpPost]
+        public IActionResult AddSilo(AddSiloViewModel addSiloViewModel)
+        {
+            var newSilo = sqlSiloRepository.AddSilo(addSiloViewModel.silo);
+            return RedirectToAction("Index");
         }
 
+
+        [HttpPost]
+        public IActionResult DeleteSilo(int id)
+        {
+            Silo siloToDelete = sqlSiloRepository.FindSilo(id);
+            if (siloToDelete != null)
+            {
+                sqlSiloRepository.DeleteSilo(siloToDelete);
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
 
         
 

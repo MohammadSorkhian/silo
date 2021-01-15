@@ -8,7 +8,7 @@ namespace silo_project.ViewModel
 {
     public class AddSiloViewModel
     {
-        public IEnumerable<Silo> allSilos;
-        public Silo silo;
+        public IEnumerable<Silo> allSilos { get; set; }
+        public Silo silo { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿@using silo_project.ViewModel
 @model AddSiloViewModel
+@*@model Silo*@
 @{
     int i = 1;
 }
@@ -41,8 +42,6 @@
                             <td>@silo.Weight</td>
                             <td>@silo.IsActive</td>
                             <td>@silo.IsRegistered</td>
-                            <td><button asp- type="button" class="btn btn-primary">Edit</button></td>
-                            <td><button asp- type="button" class="btn btn-danger">Delete</button></td>
                         </tr>
                         i++;
                     }
@@ -50,16 +49,16 @@
 
                         <tr>
                             <th scope="row">@i</th>
-                            <td><input asp-for="silo.Name" placeholder="Name" /></td>
-                            <td><input asp-for="silo.Capacity" /></td>
-                            <td><input asp-for="silo.DeviceID" /></td>
-                            <td><input asp-for="silo.CommandID" /></td>
-                            <td><input asp-for="silo.ZeroValue" /></td>
-                            <td><input asp-for="silo.ScaleValue" /></td>
-                            <td><input asp-for="silo.AllowDownload" /></td>
-                            <td><input asp-for="silo.Weight" /></td>
-                            <td><input asp-for="silo.IsActive" /></td>
-                            <td><input asp-for="silo.IsRegistered" /></td>
+                            <td><input asp-for="@Model.silo.Name" placeholder="Name" /></td>
+                            <td><input asp-for="@Model.silo.Capacity" /></td>
+                            <td><input asp-for="@Model.silo.DeviceID" /></td>
+                            <td><input asp-for="@Model.silo.CommandID" /></td>
+                            <td><input asp-for="@Model.silo.ZeroValue" /></td>
+                            <td><input asp-for="@Model.silo.ScaleValue" /></td>
+                            <td><input asp-for="@Model.silo.AllowDownload" /></td>
+                            <td><input asp-for="@Model.silo.Weight" /></td>
+                            <td><input asp-for="@Model.silo.IsActive" /></td>
+                            <td><input asp-for="@Model.silo.IsRegistered" /></td>
                             <td><button type="submit" class="btn btn-info">Add</button></td>
                             <td><a asp-controller="Home" asp-action="Index" type="button" class="btn btn-secondary">Cancel</a></td>
                         </tr>
@@ -70,7 +69,6 @@
         <div class="row">
         </div>
         <div class="row ">
-            <a asp-controller="Home" asp-action="AddSilo" class="btn btn-success text-light offset-9 col-3">Add a Silo</a>
         </div>
     </div>
 </div>

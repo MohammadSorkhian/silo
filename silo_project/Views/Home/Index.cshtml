@@ -42,7 +42,9 @@
                             <td>@silo.IsActive</td>
                             <td>@silo.IsRegistered</td>
                             <td><button asp- type="button" class="btn btn-primary">Edit</button></td>
-                            <td><button asp- type="button" class="btn btn-danger">Delete</button></td>
+                            <form asp-controller="Home" asp-action="DeleteSilo" asp-route-id="@silo.ID" method="post">
+                                <td><button type="submit" class="btn btn-danger">Delete</button></td>
+                            </form>                     
                         </tr>
                         i++;
                 }

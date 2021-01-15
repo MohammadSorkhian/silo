@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace silo_project.Models
 {
@@ -26,5 +27,17 @@ namespace silo_project.Models
             return (silo);
         }
 
+        public Silo FindSilo(int id)
+        {
+           return _db.Silos.FirstOrDefault((silo) => silo.ID == id);
+        }
+
+        public EntityEntry DeleteSilo(Silo silo)
+        {
+            Silo siloToDelete = silo;
+            EntityEntry entityEntry = _db.Silos.Remove(siloToDelete);
+            _db.SaveChanges();
+            return entityEntry;
+        }
     }
 }
