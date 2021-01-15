@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -28,8 +29,11 @@ namespace silo_project.Controllers
         [Route("/Index")]
         public ViewResult Index()
         {
-            var allSilos = sqlSiloRepository.GetAllSilos();
-            return View(allSilos);
+            AddSiloViewModel addSiloViewModel = new AddSiloViewModel();
+            addSiloViewModel.allSilos = sqlSiloRepository.GetAllSilos();
+            //IEnumerable allSilos = sqlSiloRepository.GetAllSilos();
+            ViewBag.type = "read";
+            return View(addSiloViewModel);
         }
 
 
@@ -38,7 +42,9 @@ namespace silo_project.Controllers
         {
             AddSiloViewModel addSiloViewModel = new AddSiloViewModel();
             addSiloViewModel.allSilos = sqlSiloRepository.GetAllSilos();
-            return View("AddSiloView", addSiloViewModel);
+            ViewBag.type = "create";
+            //return View("AddSiloView", addSiloViewModel);
+            return View("Index", addSiloViewModel);
         }
 
 
@@ -60,6 +66,29 @@ namespace silo_project.Controllers
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
+        }
+
+
+        [HttpGet]
+        public ViewResult EditSilo(int id)
+        {
+            AddSiloViewModel addSiloViewModel = new AddSiloViewModel();
+            addSiloViewModel.allSilos = sqlSiloRepository.GetAllSilos();
+            addSiloViewModel.silo = sqlSiloRepository.FindSilo(id);
+            ViewBag.type = "update";
+            return View("index", addSiloViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateSilo(AddSiloViewModel addSiloViewModel)
+        {
+            if (addSiloViewModel != null)
+            {
+                sqlSiloRepository.UpdateSilo(addSiloViewModel.silo);
+            }
+            AddSiloViewModel addSiloViewModelIndex = new AddSiloViewModel();
+            addSiloViewModelIndex.allSilos = sqlSiloRepository.GetAllSilos();
+            return RedirectToAction("Index", addSiloViewModelIndex);
         }
 
         

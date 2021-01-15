@@ -39,5 +39,12 @@ namespace silo_project.Models
             _db.SaveChanges();
             return entityEntry;
         }
+
+        public void UpdateSilo(Silo silo)
+        {
+            EntityEntry siloEntiryEntry = _db.Silos.Attach(silo);
+            siloEntiryEntry.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _db.SaveChanges();
+        }
     }
 }

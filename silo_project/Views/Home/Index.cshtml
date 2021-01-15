@@ -1,9 +1,10 @@
-﻿@using silo_project.Models
-@model IEnumerable<Silo>
+﻿@using silo_project.ViewModel
+@model AddSiloViewModel
 @{
     ViewData["Title"] = "Home Page";
     int i = 1;
 }
+
 
 <div class="text-center">
     <div class="container">
@@ -27,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var silo in Model)
+                    @foreach (var silo in Model.allSilos)
                     {
                         <tr>
                             <th scope="row">@i</th>
@@ -41,13 +42,64 @@
                             <td>@silo.Weight</td>
                             <td>@silo.IsActive</td>
                             <td>@silo.IsRegistered</td>
-                            <td><button asp- type="button" class="btn btn-primary">Edit</button></td>
+                            <td><a type="button" asp-controller="Home" asp-action="EditSilo" asp-route-id="@silo.ID" class="btn btn-primary">Edit</a></td>
                             <form asp-controller="Home" asp-action="DeleteSilo" asp-route-id="@silo.ID" method="post">
                                 <td><button type="submit" class="btn btn-danger">Delete</button></td>
-                            </form>                     
+                            </form>
                         </tr>
                         i++;
-                }
+                    }
+
+
+
+                    @if (ViewBag.type == "create")
+                    {
+                        <form enctype="multipart/form-data" asp-controller="Home" asp-action="AddSilo" method="post">
+
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td><input asp-for="@Model.silo.Name" placeholder="Name" class="form-control" style="width:100px"/></td>
+                                <td><input asp-for="@Model.silo.Capacity" placeholder="Capacity" class="form-control" style="width:100px"/></td>
+                                <td><input asp-for="@Model.silo.DeviceID" placeholder="Dev Id" class="form-control" style="width:80px" /></td>
+                                <td><input asp-for="@Model.silo.CommandID" placeholder="Cmd Id" class="form-control" style="width:95px" /></td>
+                                <td><input asp-for="@Model.silo.ZeroValue" placeholder="Zero Val" class="form-control" style="width:110px" /></td>
+                                <td><input asp-for="@Model.silo.ScaleValue" placeholder="Scale Val" class="form-control" style="width:100px" /></td>
+                                <td><input asp-for="@Model.silo.AllowDownload" /></td>
+                                <td><input asp-for="@Model.silo.Weight" placeholder="Weight" class="form-control" style="width:100px" /></td>
+                                <td><input asp-for="@Model.silo.IsActive" /></td>
+                                <td><input asp-for="@Model.silo.IsRegistered" /></td>
+                                <td><button type="submit" class="btn btn-info">Add</button></td>
+                                <td><a asp-controller="Home" asp-action="Index" type="button" class="btn btn-secondary">Cancel</a></td>
+                            </tr>
+                        </form>
+                    }
+
+
+
+                    @if (ViewBag.type == "update")
+                    {
+                        <form enctype="multipart/form-data" asp-controller="Home" asp-action="UpdateSilo" method="post">
+
+                            <tr>
+                                <th scope="row">@i</th>
+                                <input asp-for="@Model.silo.ID" placeholder="@Model.silo.ID" hidden/>
+                                <td><input asp-for="@Model.silo.Name" placeholder="@Model.silo.Name" class="form-control" style="width:100px"/></td>
+                                <td><input asp-for="@Model.silo.Capacity " placeholder="@Model.silo.Capacity" class="form-control" style="width:100px"/></td>
+                                <td><input asp-for="@Model.silo.DeviceID" placeholder="@Model.silo.DeviceID" class="form-control" style="width:80px"/></td>
+                                <td><input asp-for="@Model.silo.CommandID" placeholder="@Model.silo.CommandID" class="form-control" style="width:95px" /></td>
+                                <td><input asp-for="@Model.silo.ZeroValue" placeholder="@Model.silo.ZeroValue" class="form-control" style="width:110px" /></td>
+                                <td><input asp-for="@Model.silo.ScaleValue" placeholder="@Model.silo.ScaleValue" class="form-control" style="width:100px"/></td>
+                                <td><input asp-for="@Model.silo.AllowDownload" placeholder="@Model.silo.AllowDownload"/></td>
+                                <td><input asp-for="@Model.silo.Weight" placeholder="@Model.silo.Weight" class="form-control" style="width:100px"/></td>
+                                <td><input asp-for="@Model.silo.IsActive" placeholder="@Model.silo.IsActive"/></td>
+                                <td><input asp-for="@Model.silo.IsRegistered" placeholder="@Model.silo.IsRegistered"/></td>
+                                <td><button type="submit" class="btn btn-info">Update</button></td>
+                                <td><a asp-controller="Home" asp-action="Index" type="button" class="btn btn-secondary">Cancel</a></td>
+                            </tr>
+                        </form>
+                    }
+
+
                 </tbody>
             </table>
         </div>

@@ -15,5 +15,7 @@ namespace silo_project.Models
         Silo FindSilo(int id);
 
         EntityEntry DeleteSilo(Silo silo);
+
+        void UpdateSilo(Silo silo);
     }
 }
