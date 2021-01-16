@@ -57,10 +57,10 @@ namespace silo_project.Controllers
         [HttpPost]
         public IActionResult DeleteSilo(int id)
         {
-            Silo siloToDelete = sqlRepository.FindSilo(id);
-            if (siloToDelete != null)
+            Silo silo = sqlRepository.FindSilo(id);
+            if (silo != null)
             {
-                sqlRepository.DeleteSilo(siloToDelete);
+                sqlRepository.DeleteSilo(silo);
                 return RedirectToAction("ListOfSilos");
             }
             return RedirectToAction("ListOfSilos");
@@ -103,7 +103,55 @@ namespace silo_project.Controllers
         }
 
 
+        [HttpGet]
+        public ViewResult AddRecord()
+        {
+            Record_ViewModel recordViewModel = new Record_ViewModel();
+            recordViewModel.allRecords = sqlRepository.GetAllRecords();
+            ViewBag.type = "create";
+            return View("Record_view", recordViewModel);
+        }
 
+
+        [HttpPost]
+        public IActionResult AddRecord(Record record)
+        {
+            sqlRepository.AddRecord(record);
+            return RedirectToAction("ListOfRecords");
+        }
+
+
+        public IActionResult DeleteRecord(int id)
+        {
+            Record record = sqlRepository.FindRecord(id);
+            sqlRepository.DeleteRecord(record);
+            return RedirectToAction("ListOfRecords");
+        }
+
+
+        [HttpGet]
+        public ViewResult UpdateRecord(int id)
+        {
+            Record_ViewModel recordViewModel = new Record_ViewModel();
+            recordViewModel.allRecords = sqlRepository.GetAllRecords();
+            recordViewModel.record = sqlRepository.FindRecord(id);
+            recordViewModel.siloNames = sqlRepository.GetAllSilos().Select(s => s.Name);
+            ViewBag.type = "update";
+            return View("Record_view", recordViewModel);
+        //var x = recordViewModel.allRecords.Select(r => new { r.Silo.ID, r.Silo.Name, });
+        }
+
+
+        [HttpPost]
+        public IActionResult UpdateRecord(Record_ViewModel recordViewModel)
+        {
+            Record record = new Record();
+            record = recordViewModel.record;
+            record.Silo = sqlRepository.GetAllSilos().FirstOrDefault(s => s.Name == recordViewModel.record.Silo.Name);
+            sqlRepository.UpdateRecord(record);
+
+            return RedirectToAction("ListOfRecords");
+        }
 
 
         //    private readonly ILogger<HomeController> _logger;

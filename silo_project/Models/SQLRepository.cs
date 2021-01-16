@@ -65,7 +65,7 @@ namespace silo_project.Models
             return record;
         }
 
-        public EntityEntry DeteteRecord(Record record)
+        public EntityEntry DeleteRecord(Record record)
         {
             EntityEntry entityEntry = _db.Records.Remove(record);
             _db.SaveChanges();
@@ -80,7 +80,9 @@ namespace silo_project.Models
 
         public void UpdateRecord(Record record)
         {
-            throw new NotImplementedException();
+            EntityEntry recordEntityEntry = _db.Records.Attach(record);
+            recordEntityEntry.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _db.SaveChanges();
         }
         #endregion Records
     }

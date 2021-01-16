@@ -11,6 +11,6 @@ namespace silo_project.ViewModel
     {
         public IEnumerable<Record> allRecords { get; set; }
         public Record record { get; set; }
-        public List<string> silosNames { get; set; }
+        public IEnumerable<string> siloNames { get; set; }
     }
 }

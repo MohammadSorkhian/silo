@@ -17,7 +17,7 @@ namespace silo_project.Models
         public IEnumerable<Record> GetAllRecords();
         public Record AddRecord(Record record);
         public Record FindRecord(int id);
-        public EntityEntry DeteteRecord(Record record);
+        public EntityEntry DeleteRecord(Record record);
         public void UpdateRecord(Record record);
     }
 }
