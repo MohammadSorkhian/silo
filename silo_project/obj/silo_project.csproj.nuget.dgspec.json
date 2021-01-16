@@ -68,6 +68,10 @@
               "target": "Package",
               "version": "[2.2.0, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
             "System.Globalization.Calendars": {
               "target": "Package",
               "version": "[4.3.0, )"

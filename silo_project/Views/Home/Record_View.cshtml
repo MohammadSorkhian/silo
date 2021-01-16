@@ -1,0 +1,86 @@
+﻿@using silo_project.ViewModel
+@model Record_ViewModel
+@{
+    ViewData["Title"] = "Records Page";
+    int i = 1;
+}
+
+
+<div class="text-center">
+    <div class="container">
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Silo Name</th>
+                        <th scope="col">En Date</th>
+                        <th scope="col">Pe Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Weight</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var record in Model.allRecords)
+                    {
+                        <tr>
+                            <th scope="row">@i</th>
+                            <td>@record.Silo.Name</td>
+                            <td>@record.EnDate</td>
+                            <td>@record.PeDate</td>
+                            <td>@record.Time</td>
+                            <td>@record.Weight</td>
+
+                            <td><a type="button" asp-controller="Home" asp-action="EditRecord" asp-route-id="@record.ID" class="btn btn-primary">Edit</a></td>
+                            <form asp-controller="Home" asp-action="DeleteRecord" asp-route-id="@record.ID" method="post">
+                                <td><button type="submit" class="btn btn-danger">Delete</button></td>
+                            </form>
+                        </tr>
+                        i++;
+                    }
+
+
+                    @if (ViewBag.type == "create")
+                    {
+                        <form enctype="multipart/form-data" asp-controller="Home" asp-action="AddRecord" method="post">
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td><input asp-for="@Model.record.Silo.Name" placeholder="Name" class="form-control" style="width:100px" /></td>
+                                <td><input asp-for="@Model.record.EnDate" placeholder="En Date" class="form-control" style="width:100px" /></td>
+                                <td><input asp-for="@Model.record.PeDate" placeholder="Pe Date" class="form-control" style="width:80px" /></td>
+                                <td><input asp-for="@Model.record.Time" placeholder="Time" class="form-control" style="width:95px" /></td>
+                                <td><input asp-for="@Model.record.Weight" placeholder="Weight" class="form-control" style="width:110px" /></td>
+                                <td><button type="submit" class="btn btn-info">Add</button></td>
+                                <td><a asp-controller="Home" asp-action="Record_View" type="button" class="btn btn-secondary">Cancel</a></td>
+                            </tr>
+                        </form>
+                    }
+
+
+                    @if (ViewBag.type == "update")
+                    {
+                        <form enctype="multipart/form-data" asp-controller="Home" asp-action="UpdateRecord" method="post">
+
+                            <tr>
+                                <th scope="row">@i</th>
+                                <input asp-for="@Model.record.ID" placeholder="@Model.record.ID" hidden />
+                                <td><input asp-for="@Model.record.Silo.Name" placeholder="Name" class="form-control" style="width:100px" />@Model.record.Silo.Name</td>
+                                <td><input asp-for="@Model.record.EnDate" placeholder="En Date" class="form-control" style="width:100px" /></td>
+                                <td><input asp-for="@Model.record.PeDate" placeholder="Pe Date" class="form-control" style="width:80px" /></td>
+                                <td><input asp-for="@Model.record.Time" placeholder="Time" class="form-control" style="width:95px" /></td>
+                                <td><input asp-for="@Model.record.Weight" placeholder="Weight" class="form-control" style="width:110px" /></td>
+                                <td><button type="submit" class="btn btn-info">Update</button></td>
+                                <td><a asp-controller="Home" asp-action="ListOfSilos" type="button" class="btn btn-secondary">Cancel</a></td>
+                            </tr>
+                        </form>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="row ">
+            <a asp-controller="Home" asp-action="AddSilo" class="btn btn-success text-light offset-9 col-3">Add a Silo</a>
+        </div>
+    </div>
+</div>

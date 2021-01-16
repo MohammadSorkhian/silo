@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using silo_project.Models;
 using silo_project.ViewModel;
 
@@ -14,84 +15,96 @@ namespace silo_project.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ISiloRepository sqlSiloRepository;
+        private readonly ISQLRepository sqlRepository;
         private readonly IHostingEnvironment hostingEnvironment;
 
-        public HomeController(ISiloRepository sqlSiloRepository, IHostingEnvironment hostingEnvironment)
+        public HomeController(ISQLRepository sqlRepository, IHostingEnvironment hostingEnvironment)
         {
-            this.sqlSiloRepository = sqlSiloRepository;
+            this.sqlRepository = sqlRepository;
             this.hostingEnvironment = hostingEnvironment;
         }
 
+        #region Silo
 
-        [Route("/")]
-        [Route("/Home")]
-        [Route("/Index")]
-        public ViewResult Index()
+        public ViewResult ListOfSilos()
         {
-            AddSiloViewModel addSiloViewModel = new AddSiloViewModel();
-            addSiloViewModel.allSilos = sqlSiloRepository.GetAllSilos();
-            //IEnumerable allSilos = sqlSiloRepository.GetAllSilos();
+            Silo_ViewModel siloViewModel = new Silo_ViewModel();
+            siloViewModel.allSilos = sqlRepository.GetAllSilos();
             ViewBag.type = "read";
-            return View(addSiloViewModel);
+            return View("Silo_View", siloViewModel);
         }
 
 
         [HttpGet]
         public ViewResult AddSilo()
         {
-            AddSiloViewModel addSiloViewModel = new AddSiloViewModel();
-            addSiloViewModel.allSilos = sqlSiloRepository.GetAllSilos();
+            Silo_ViewModel SiloViewModel = new Silo_ViewModel();
+            SiloViewModel.allSilos = sqlRepository.GetAllSilos();
             ViewBag.type = "create";
-            //return View("AddSiloView", addSiloViewModel);
-            return View("Index", addSiloViewModel);
+            //return View("AddSiloView", Silo_ViewModel);
+            return View("Silo_View", SiloViewModel);
         }
 
 
         [HttpPost]
-        public IActionResult AddSilo(AddSiloViewModel addSiloViewModel)
+        public IActionResult AddSilo(Silo_ViewModel Silo_ViewModel)
         {
-            var newSilo = sqlSiloRepository.AddSilo(addSiloViewModel.silo);
-            return RedirectToAction("Index");
+            var newSilo = sqlRepository.AddSilo(Silo_ViewModel.silo);
+            return RedirectToAction("ListOfSilos");
         }
 
 
         [HttpPost]
         public IActionResult DeleteSilo(int id)
         {
-            Silo siloToDelete = sqlSiloRepository.FindSilo(id);
+            Silo siloToDelete = sqlRepository.FindSilo(id);
             if (siloToDelete != null)
             {
-                sqlSiloRepository.DeleteSilo(siloToDelete);
-                return RedirectToAction("Index");
+                sqlRepository.DeleteSilo(siloToDelete);
+                return RedirectToAction("ListOfSilos");
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("ListOfSilos");
         }
 
 
         [HttpGet]
         public ViewResult EditSilo(int id)
         {
-            AddSiloViewModel addSiloViewModel = new AddSiloViewModel();
-            addSiloViewModel.allSilos = sqlSiloRepository.GetAllSilos();
-            addSiloViewModel.silo = sqlSiloRepository.FindSilo(id);
+            Silo_ViewModel SiloViewModel = new Silo_ViewModel();
+            SiloViewModel.allSilos = sqlRepository.GetAllSilos();
+            SiloViewModel.silo = sqlRepository.FindSilo(id);
             ViewBag.type = "update";
-            return View("index", addSiloViewModel);
+            return View("Silo_View", SiloViewModel);
         }
+
 
         [HttpPost]
-        public IActionResult UpdateSilo(AddSiloViewModel addSiloViewModel)
+        public IActionResult UpdateSilo(Silo_ViewModel siloViewModel)
         {
-            if (addSiloViewModel != null)
+            if (siloViewModel != null)
             {
-                sqlSiloRepository.UpdateSilo(addSiloViewModel.silo);
+                sqlRepository.UpdateSilo(siloViewModel.silo);
             }
-            AddSiloViewModel addSiloViewModelIndex = new AddSiloViewModel();
-            addSiloViewModelIndex.allSilos = sqlSiloRepository.GetAllSilos();
-            return RedirectToAction("Index", addSiloViewModelIndex);
+            return RedirectToAction("ListOfSilos");
+        }
+        #endregion
+
+
+
+
+        [Route("/")]
+        [Route("/Home")]
+        [Route("/Index")]
+        public ViewResult ListOfRecords()
+        {
+            Record_ViewModel recordViewModel = new Record_ViewModel();
+            recordViewModel.allRecords = sqlRepository.GetAllRecords();
+            return View("Record_view", recordViewModel);
         }
 
-        
+
+
+
 
         //    private readonly ILogger<HomeController> _logger;
 
@@ -100,7 +113,7 @@ namespace silo_project.Controllers
         //        _logger = logger;
         //    }
 
-        //    public IActionResult Index()
+        //    public IActionResult ListOfSilos()
         //    {
         //        return View();
         //    }

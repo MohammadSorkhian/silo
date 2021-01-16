@@ -29,7 +29,7 @@ namespace silo_project
             Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddControllersWithViews();
-            services.AddScoped<ISiloRepository, SQLSiloRepository>();
+            services.AddScoped<ISQLRepository, SQLSiloRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

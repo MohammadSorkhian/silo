@@ -6,7 +6,7 @@ using silo_project.Models;
 
 namespace silo_project.ViewModel
 {
-    public class AddSiloViewModel
+    public class Silo_ViewModel
     {
         public IEnumerable<Silo> allSilos { get; set; }
         public Silo silo { get; set; }

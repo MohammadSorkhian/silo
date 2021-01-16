@@ -6,16 +6,18 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace silo_project.Models
 {
-    public interface ISiloRepository
+    public interface ISQLRepository
     {
         IEnumerable<Silo> GetAllSilos();
-
         Silo AddSilo(Silo silo);
-
         Silo FindSilo(int id);
-
         EntityEntry DeleteSilo(Silo silo);
-
         void UpdateSilo(Silo silo);
+
+        public IEnumerable<Record> GetAllRecords();
+        public Record AddRecord(Record record);
+        public Record FindRecord(int id);
+        public EntityEntry DeteteRecord(Record record);
+        public void UpdateRecord(Record record);
     }
 }

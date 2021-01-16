@@ -370,7 +370,6 @@ C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\scopedcss\bundle\silo
 C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\silo_project.TagHelpers.input.cache
 C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\silo_project.TagHelpers.output.cache
 C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\silo_project.RazorCoreGenerate.cache
-C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
@@ -386,4 +385,7 @@ C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\ref\silo_project.dll
 C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\silo_project.pdb
 C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\silo_project.genruntimeconfig.cache
 C:\Users\moham\OneDrive\silo\silo_project\bin\Debug\net5.0\Microsoft.VisualStudio.Web.BrowserLink.dll
-C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\Razor\Views\Home\AddSiloView.cshtml.g.cs
+C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\Razor\Views\Home\Silo_View.cshtml.g.cs
+C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\Razor\Views\Home\Record_View.cshtml.g.cs
+C:\Users\moham\OneDrive\silo\silo_project\obj\Debug\net5.0\Razor\Views\Home\temp.cshtml.g.cs
