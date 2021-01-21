@@ -10,87 +10,141 @@
 <div class="text-center">
     <div class="container">
         <div class="row">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Silo Name</th>
-                        <th scope="col">En Date</th>
-                        <th scope="col">Pe Date</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Weight</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var record in Model.allRecords)
-                    {
+            <div class="col-2 border p-0">
+                <div class="row">
+                    <a class="btn btn-dark disabled float-left btn-block text-light">Filter</a>
+                </div>
+                <div class="row">
+                    <select id="inputState" class="form-select">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+
+
+
+
+                <form class="row g-3">
+     
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputCity" class="form-label">City</label>
+                        <input type="text" class="form-control" id="inputCity">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">State</label>
+ 
+                    </div>
+                    <div class="col-md-2">
+                        <label for="inputZip" class="form-label">Zip</label>
+                        <input type="text" class="form-control" id="inputZip">
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                                Check me out
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </div>
+                </form>
+
+
+
+
+
+
+
+            </div>
+            <div class="col-10">
+                <table class="table table-striped">
+                    <thead>
                         <tr>
-                            <th scope="row">@i</th>
-                            <td>@record.Silo.Name</td>
-                            <td>@record.EnDate</td>
-                            <td>@record.PeDate</td>
-                            <td>@record.Time</td>
-                            <td>@record.Weight</td>
-
-                            <td><a type="button" asp-controller="Home" asp-action="UpdateRecord" asp-route-id="@record.ID" class="btn btn-primary">Edit</a></td>
-                            <form asp-controller="Home" asp-action="DeleteRecord" asp-route-id="@record.ID" method="post">
-                                <td><button type="submit" class="btn btn-danger">Delete</button></td>
-                            </form>
+                            <th scope="col">#</th>
+                            <th scope="col">Silo Name</th>
+                            <th scope="col">En Date</th>
+                            <th scope="col">Pe Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Weight</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
-                        i++;
-                    }
-
-
-                    @if (ViewBag.type == "create")
-                    {
-                        <form enctype="multipart/form-data" asp-controller="Home" asp-action="AddRecord" method="post">
+                    </thead>
+                    <tbody>
+                        @foreach (var record in Model.allRecords)
+                        {
                             <tr>
                                 <th scope="row">@i</th>
-                                <td><input asp-for="@Model.record.Silo.Name" placeholder="Name" class="form-control" style="width:100px" /></td>
-                                <td><input asp-for="@Model.record.EnDate" placeholder="En Date" class="form-control" style="width:170px" /></td>
-                                <td><input asp-for="@Model.record.PeDate" placeholder="Pe Date" class="form-control" style="width:170px" /></td>
-                                <td><input asp-for="@Model.record.Time" placeholder="Time" class="form-control" style="width:95px" /></td>
-                                <td><input asp-for="@Model.record.Weight" placeholder="Weight" class="form-control" style="width:90px" /></td>
-                                <td><button type="submit" class="btn btn-info">Add</button></td>
-                                <td><a asp-controller="Home" asp-action="ListOfRecords" type="button" class="btn btn-secondary">Cancel</a></td>
+                                <td>@record.Silo.Name</td>
+                                <td>@record.EnDate</td>
+                                <td>@record.PeDate</td>
+                                <td>@record.Time</td>
+                                <td>@record.Weight</td>
+
+                                <td><a type="button" asp-controller="Home" asp-action="UpdateRecord" asp-route-id="@record.ID" class="btn btn-primary">Edit</a></td>
+                                <form asp-controller="Home" asp-action="DeleteRecord" asp-route-id="@record.ID" method="post">
+                                    <td><button type="submit" class="btn btn-danger">Delete</button></td>
+                                </form>
                             </tr>
-                        </form>
-                    }
+                            i++;
+                        }
 
 
-                    @if (ViewBag.type == "update")
-                    {
-                        <form enctype="multipart/form-data" asp-controller="Home" asp-action="UpdateRecord" method="post">
-                            <tr>
-                                <th scope="row">@i</th>
-                                <input asp-for="@Model.record.ID" placeholder="@Model.record.ID" hidden />
-
-                                <td>
-                                    <div class="form-group">
-                                        <select asp-for="@Model.record.Silo.Name" id="inputState" class="form-control" style="width:100px">
-                                            <option selected>Choose...</option>
-                                            @foreach(var name in Model.siloNames)
-                                            {
-                                            <option>@name</option>
-                                            }
-                                        </select>
-                                    </div>
-                                </td>
+                        @if (ViewBag.type == "create")
+                        {
+                            <form enctype="multipart/form-data" asp-controller="Home" asp-action="AddRecord" method="post">
+                                <tr>
+                                    <th scope="row">@i</th>
+                                    <td><input asp-for="@Model.record.Silo.Name" placeholder="Name" class="form-control" style="width:100px" /></td>
+                                    <td><input asp-for="@Model.record.EnDate" placeholder="En Date" class="form-control" style="width:170px" /></td>
+                                    <td><input asp-for="@Model.record.PeDate" placeholder="Pe Date" class="form-control" style="width:170px" /></td>
+                                    <td><input asp-for="@Model.record.Time" placeholder="Time" class="form-control" style="width:95px" /></td>
+                                    <td><input asp-for="@Model.record.Weight" placeholder="Weight" class="form-control" style="width:90px" /></td>
+                                    <td><button type="submit" class="btn btn-info">Add</button></td>
+                                    <td><a asp-controller="Home" asp-action="ListOfRecords" type="button" class="btn btn-secondary">Cancel</a></td>
+                                </tr>
+                            </form>
+                        }
 
 
-                                <td><input asp-for="@Model.record.EnDate" placeholder="En Date" class="form-control" style="width:170px" /></td>
-                                <td><input asp-for="@Model.record.PeDate" placeholder="Pe Date" class="form-control" style="width:170px" /></td>
-                                <td><input asp-for="@Model.record.Time" placeholder="Time" class="form-control" style="width:95px" /></td>
-                                <td><input asp-for="@Model.record.Weight" placeholder="Weight" class="form-control" style="width:90px" /></td>
-                                <td><button type="submit" class="btn btn-info">Update</button></td>
-                                <td><a asp-controller="Home" asp-action="ListOfRecords" type="button" class="btn btn-secondary">Cancel</a></td>
-                            </tr>
-                        </form>
-                    }
-                </tbody>
-            </table>
+                        @if (ViewBag.type == "update")
+                        {
+                            <form enctype="multipart/form-data" asp-controller="Home" asp-action="UpdateRecord" method="post">
+                                <tr>
+                                    <th scope="row">@i</th>
+                                    <input asp-for="@Model.record.ID" placeholder="@Model.record.ID" hidden />
+
+                                    <td>
+                                        <div class="form-group">
+                                            <select asp-for="@Model.record.Silo.Name" id="inputState" class="form-control" style="width:100px">
+                                                <option selected>Choose...</option>
+                                                @foreach (var name in Model.siloNames)
+                                                {
+                                                    <option>@name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </td>
+
+
+                                    <td><input asp-for="@Model.record.EnDate" placeholder="En Date" class="form-control" style="width:170px" /></td>
+                                    <td><input asp-for="@Model.record.PeDate" placeholder="Pe Date" class="form-control" style="width:170px" /></td>
+                                    <td><input asp-for="@Model.record.Time" placeholder="Time" class="form-control" style="width:95px" /></td>
+                                    <td><input asp-for="@Model.record.Weight" placeholder="Weight" class="form-control" style="width:90px" /></td>
+                                    <td><button type="submit" class="btn btn-info">Update</button></td>
+                                    <td><a asp-controller="Home" asp-action="ListOfRecords" type="button" class="btn btn-secondary">Cancel</a></td>
+                                </tr>
+                            </form>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="row ">
             <a asp-controller="Home" asp-action="AddRecord" class="btn btn-success text-light offset-9 col-3">Add a Record</a>

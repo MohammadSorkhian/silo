@@ -12,5 +12,15 @@ namespace silo_project.ViewModel
         public IEnumerable<Record> allRecords { get; set; }
         public Record record { get; set; }
         public IEnumerable<string> siloNames { get; set; }
+
+        //These info is used for filtering
+        public string siloName { get; set; }
+        public DateTime startDate { get; set; }
+        public DateTime endDate { get; set; }
+        public TimeSpan startTime { get; set; }
+        public TimeSpan endTime { get; set; }
+        public int startWeight { get; set; }
+        public int endWeight { get; set; }
+
     }
 }

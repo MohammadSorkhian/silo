@@ -154,6 +154,12 @@ namespace silo_project.Controllers
         }
 
 
+        public ViewResult Filter()
+        {
+            return View("Silo_View");
+        }
+
+
         //    private readonly ILogger<HomeController> _logger;
 
         //    public HomeController(ILogger<HomeController> logger)
