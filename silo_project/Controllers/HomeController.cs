@@ -26,6 +26,9 @@ namespace silo_project.Controllers
 
         #region Silo
 
+        [Route("/")]
+        [Route("/Home")]
+        [Route("/Index")]
         public ViewResult ListOfSilos()
         {
             Silo_ViewModel siloViewModel = new Silo_ViewModel();
@@ -92,14 +95,27 @@ namespace silo_project.Controllers
 
 
 
-        [Route("/")]
-        [Route("/Home")]
-        [Route("/Index")]
-        public ViewResult ListOfRecords()
+        [HttpGet]
+        public ViewResult Record()
         {
             Record_ViewModel recordViewModel = new Record_ViewModel();
-            recordViewModel.allRecords = sqlRepository.GetAllRecords();
+            //recordViewModel.allRecords = sqlRepository.GetAllRecords();
+            recordViewModel.siloNames = sqlRepository.GetAllSilos().Select(s => s.Name);
+            recordViewModel.siloName = "All";
+            //recordViewModel.startDate = new DateTime(2020, 10, 10);
+            //recordViewModel.siloName = recordViewModel.siloNames.FirstOrDefault();
             return View("Record_view", recordViewModel);
+        }
+
+
+        [HttpPost]
+        public ViewResult Record(Record_ViewModel recordViewModel)
+        {
+            recordViewModel.siloNames = sqlRepository.GetAllSilos().Select(s => s.Name);
+            recordViewModel.allRecords = sqlRepository.GetAllRecords();
+            if (recordViewModel.siloName != null && recordViewModel.siloName != "All") recordViewModel.allRecords = recordViewModel.allRecords.Where(r => r.Silo.Name == recordViewModel.siloName);
+
+            return View("Record_View", recordViewModel);
         }
 
 
@@ -113,11 +129,12 @@ namespace silo_project.Controllers
         }
 
 
+
         [HttpPost]
         public IActionResult AddRecord(Record record)
         {
             sqlRepository.AddRecord(record);
-            return RedirectToAction("ListOfRecords");
+            return RedirectToAction("Record");
         }
 
 
@@ -125,7 +142,7 @@ namespace silo_project.Controllers
         {
             Record record = sqlRepository.FindRecord(id);
             sqlRepository.DeleteRecord(record);
-            return RedirectToAction("ListOfRecords");
+            return RedirectToAction("Record");
         }
 
 
@@ -138,7 +155,7 @@ namespace silo_project.Controllers
             recordViewModel.siloNames = sqlRepository.GetAllSilos().Select(s => s.Name);
             ViewBag.type = "update";
             return View("Record_view", recordViewModel);
-        //var x = recordViewModel.allRecords.Select(r => new { r.Silo.ID, r.Silo.Name, });
+            //var x = recordViewModel.allRecords.Select(r => new { r.Silo.ID, r.Silo.Name, });
         }
 
 
@@ -150,7 +167,7 @@ namespace silo_project.Controllers
             record.Silo = sqlRepository.GetAllSilos().FirstOrDefault(s => s.Name == recordViewModel.record.Silo.Name);
             sqlRepository.UpdateRecord(record);
 
-            return RedirectToAction("ListOfRecords");
+            return RedirectToAction("Record");
         }
 
 

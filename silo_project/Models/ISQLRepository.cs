@@ -19,5 +19,7 @@ namespace silo_project.Models
         public Record FindRecord(int id);
         public EntityEntry DeleteRecord(Record record);
         public void UpdateRecord(Record record);
+        //public IEnumerable<Record> Filter(string name, DateTime startDate, DateTime ebdDate, TimeSpan startTime, TimeSpan endTime, int startWeight, int endWeight)
+
     }
 }
