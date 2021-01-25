@@ -15,39 +15,25 @@
                 <div class="row">
                     <a class="btn btn-dark disabled float-left btn-block text-light mb-2">Filter</a>
                 </div>
-                <form enctype="multipart/form-data" asp-controller="Home" asp-action="Record" method="post">
+                @*asp-controller="Home" asp-action="Record"*@
+                <form enctype="multipart/form-data" id="filterForm" method="post">
                     <div class="form-group pb-2 pr-2 row ">
-                        <select asp-for="@Model.siloName" class="form-control">
+                        <select asp-for="@Model.siloName" class="form-control mb-2">
                             <option selected>@Model.siloName</option>
-                            <option >All</option>
+                            <option>All</option>
                             @foreach (var siloName in Model.siloNames)
                             {
-                                <option>@siloName</option>
+                                if (siloName != Model.siloName)
+                                {
+                                    <option>@siloName</option>
+                                }
                             }
                         </select>
-                        <button type="submit" class="btn btn-primary">Select</button>
+                        <button asp-controller="Home" asp-action="Record" id="filterForm" type="submit" class="btn btn-primary ">Select</button>
                     </div>
-
-
                 </form>
 
 
-
-                    @*<form enctype="multipart/form-data" asp-controller="Home" asp-action="AddRecord" method="post">
-                        <tr>
-                            <th scope="row">@i</th>
-                            <td><input asp-for="@Model.record.Silo.Name" placeholder="Name" class="form-control" style="width:100px" /></td>
-                            <td><input asp-for="@Model.record.EnDate" placeholder="En Date" class="form-control" style="width:170px" /></td>
-                            <td><input asp-for="@Model.record.PeDate" placeholder="Pe Date" class="form-control" style="width:170px" /></td>
-                            <td><input asp-for="@Model.record.Time" placeholder="Time" class="form-control" style="width:95px" /></td>
-                            <td><input asp-for="@Model.record.Weight" placeholder="Weight" class="form-control" style="width:90px" /></td>
-                            <td><button type="submit" class="btn btn-info">Add</button></td>
-                            <td><a asp-controller="Home" asp-action="Record" type="button" class="btn btn-secondary">Cancel</a></td>
-                        </tr>
-                    </form>
-                    }*@
-
-               
 
                 @*Area for showing records*@
             </div>
@@ -140,7 +126,7 @@
                     }
                     else
                     {
-                        <p>please Select a Filer</p>
+                <div class="m-3"><span class="bg-primary p-1 btn text-light">please Select a Filer</span></div>
 }
                 </table>
             </div>
